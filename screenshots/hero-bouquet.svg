@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="Нежный пастельный букет цветов">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff6f0"/>
+      <stop offset="1" stop-color="#fbe7e3"/>
+    </linearGradient>
+    <radialGradient id="roseGrad" cx="0.35" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#f7c6ca"/>
+      <stop offset="1" stop-color="#d98e94"/>
+    </radialGradient>
+    <radialGradient id="roseInner" cx="0.4" cy="0.35" r="0.9">
+      <stop offset="0" stop-color="#fbd8da"/>
+      <stop offset="1" stop-color="#eeb0b4"/>
+    </radialGradient>
+    <linearGradient id="lavGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8ddf6"/>
+      <stop offset="1" stop-color="#b79cd8"/>
+    </linearGradient>
+    <linearGradient id="peachGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffdbc6"/>
+      <stop offset="1" stop-color="#ef9f7c"/>
+    </linearGradient>
+    <linearGradient id="paperGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbf1ea"/>
+      <stop offset="1" stop-color="#e9cbc0"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b7dcc2"/>
+      <stop offset="1" stop-color="#7fb68e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- фон -->
+  <rect width="640" height="640" fill="url(#bg)"/>
+
+  <!-- мягкие световые пятна -->
+  <circle cx="150" cy="150" r="130" fill="#ffffff" opacity="0.5"/>
+  <circle cx="520" cy="500" r="150" fill="#ffe1d6" opacity="0.35"/>
+
+  <!-- стебли -->
+  <g stroke="#7fb68e" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M340 400 C 340 330, 340 270, 340 225"/>
+    <path d="M300 405 C 300 320, 270 265, 252 220"/>
+    <path d="M380 405 C 380 320, 410 265, 428 220"/>
+    <path d="M320 400 C 320 350, 300 310, 285 275"/>
+    <path d="M360 400 C 360 350, 380 310, 395 275"/>
+  </g>
+
+  <!-- листья -->
+  <g fill="url(#leafGrad)">
+    <path d="M325 350 C 310 340, 295 340, 285 355 C 300 372, 322 368, 325 350 Z"/>
+    <path d="M355 360 C 370 350, 385 350, 395 365 C 380 382, 358 378, 355 360 Z"/>
+    <path d="M305 310 C 290 295, 275 295, 268 310 C 282 325, 302 322, 305 310 Z"/>
+    <path d="M375 315 C 390 300, 405 300, 412 315 C 398 330, 378 327, 375 315 Z"/>
+  </g>
+
+  <!-- обёрточная бумага -->
+  <g>
+    <path d="M225 385 C 240 505, 295 585, 340 620 C 385 585, 440 505, 455 385 C 455 385, 430 360, 340 352 C 250 360, 225 385, 225 385 Z" fill="url(#paperGrad)"/>
+    <path d="M455 385 L 452 398 C 452 398, 437 372, 340 356 C 243 372, 228 398, 228 398 L 225 385 C 225 385, 250 360, 340 352 C 430 360, 455 385, 455 385 Z" fill="#fdf7f1" opacity="0.9"/>
+    <ellipse cx="340" cy="388" rx="112" ry="20" fill="#f7e8de"/>
+    <path d="M340 620 C 350 645, 328 645, 338 662" stroke="#d9a99a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- центральная роза -->
+  <g transform="translate(340,220)">
+    <circle cx="-46" cy="14" r="38" fill="url(#roseGrad)"/>
+    <circle cx="-32" cy="-34" r="40" fill="url(#roseGrad)"/>
+    <circle cx="18" cy="-44" r="42" fill="url(#roseGrad)"/>
+    <circle cx="50" cy="-8" r="36" fill="url(#roseGrad)"/>
+    <circle cx="30" cy="32" r="35" fill="url(#roseGrad)"/>
+    <circle cx="-14" cy="38" r="36" fill="url(#roseGrad)"/>
+    <circle cx="-4" cy="-2" r="34" fill="url(#roseInner)"/>
+    <circle cx="-4" cy="-2" r="20" fill="#f0aab0" opacity="0.55"/>
+    <path d="M -4 -2 C 10 -14, 16 -2, 4 6 C -6 11, -14 6, -4 -2 Z" fill="#e88f96"/>
+  </g>
+
+  <!-- бутоны по бокам -->
+  <g>
+    <circle cx="285" cy="272" r="14" fill="url(#roseGrad)"/>
+    <circle cx="395" cy="272" r="14" fill="url(#roseGrad)"/>
+  </g>
+
+  <!-- тюльпан сиреневый (слева) -->
+  <g transform="translate(252,222)">
+    <path d="M -16 14 C -26 -18, -22 -46, 0 -52 C 22 -46, 26 -18, 16 14 C 10 28, -10 28, -16 14 Z" fill="url(#lavGrad)"/>
+    <path d="M -16 14 C -10 2, 2 -2, 10 4" stroke="#a98bc8" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M -16 14 C -26 -18, -22 -46, 0 -52 L 0 14 Z" fill="#ffffff" opacity="0.18"/>
+  </g>
+
+  <!-- тюльпан персиковый (справа) -->
+  <g transform="translate(428,222)">
+    <path d="M -16 14 C -26 -18, -22 -46, 0 -52 C 22 -46, 26 -18, 16 14 C 10 28, -10 28, -16 14 Z" fill="url(#peachGrad)"/>
+    <path d="M -16 14 C -10 2, 2 -2, 10 4" stroke="#e39a77" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M -16 14 C -26 -18, -22 -46, 0 -52 L 0 14 Z" fill="#ffffff" opacity="0.18"/>
+  </g>
+
+  <!-- маленькие цветы-звёздочки -->
+  <g fill="#f6f9fc">
+    <circle cx="205" cy="330" r="10"/><circle cx="205" cy="330" r="5" fill="#b7b3e8"/>
+    <circle cx="470" cy="330" r="10"/><circle cx="470" cy="330" r="5" fill="#b7b3e8"/>
+  </g>
+
+  <!-- лента -->
+  <path d="M 298 470 C 320 500, 360 500, 382 470" stroke="#d4b3b3" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M 340 478 L 340 510" stroke="#d4b3b3" stroke-width="8" stroke-linecap="round"/>
+</svg>
