@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Middlemist — цветочный магазин</title>
+    <style>
+        /* ---------- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И СБРОС ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+        }
+
+        :root {
+            --pastel-rose: #f9e7e7;
+            --pastel-lavender: #e8e0f0;
+            --pastel-mint: #d9eee9;
+            --pastel-cream: #fdf6f0;
+            --pastel-peach: #ffe8dd;
+            --pastel-blue: #d4e6f1;
+            --powder-pink: #f3d9d9;
+            --text-dark: #4a3b3b;
+            --text-soft: #6b5a5a;
+            --white: #ffffff;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 20px 30px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.03);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
+            --transition: 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: var(--pastel-cream);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ---------- КОНТЕЙНЕР ---------- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- НАВИГАЦИЯ (ФИКСИРОВАННАЯ) ---------- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 250, 245, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 0;
+            box-shadow: 0 6px 18px rgba(211, 184, 184, 0.08);
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(243, 217, 217, 0.4);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            transition: transform 0.2s;
+        }
+
+        .logo span {
+            font-weight: 500;
+            color: #b3888b;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 400;
+            color: var(--text-soft);
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.2s;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4b3b3;
+            transition: width 0.25s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* мобильное меню (гамбургер) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .menu-toggle span {
+            width: 26px;
+            height: 2px;
+            background: var(--text-dark);
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        /* ---------- ГЕРОЙ-СЕКЦИЯ ---------- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, #fdf6f0 0%, #f9e7e7 100%);
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🌸';
+            font-size: 280px;
+            position: absolute;
+            right: -40px;
+            bottom: -70px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1 1 400px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 300;
+            line-height: 1.2;
+            color: #4f3b3b;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 .accent {
+            font-weight: 500;
+            color: #b3888b;
+            display: inline-block;
+            border-bottom: 4px solid #f3d9d9;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            margin-bottom: 36px;
+            max-width: 550px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #d4b3b3;
+            color: #ffffff;
+            padding: 16px 42px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 12px 24px -8px rgba(212, 179, 179, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-primary:hover {
+            background: #c49b9b;
+            transform: translateY(-4px);
+            box-shadow: 0 22px 30px -10px rgba(196, 155, 155, 0.5);
+        }
+
+        .hero-image {
+            flex: 1 1 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image .flower-badge {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            padding: 30px;
+            font-size: 8rem;
+            line-height: 1;
+            box-shadow: var(--shadow-sm);
+            animation: float 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-2deg); }
+            100% { transform: translateY(-18px) rotate(2deg); }
+        }
+
+        /* ---------- ОБЩИЕ СТИЛИ СЕКЦИЙ ---------- */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(243, 217, 217, 0.4);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 300;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+            color: #4a3b3b;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            max-width: 700px;
+            margin-bottom: 48px;
+        }
+
+        /* ---------- О КОМПАНИИ ---------- */
+        .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1 1 400px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin-bottom: 20px;
+        }
+
+        .about-highlight {
+            background: var(--pastel-lavender);
+            padding: 24px 28px;
+            border-radius: var(--border-radius-sm);
+            border-left: 6px solid #d4b3b3;
+            font-style: italic;
+            color: #4f3b3b;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: var(--white);
+            padding: 20px 32px;
+            border-radius: 40px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: center;
+            flex: 1 1 120px;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            background: #fff9f7;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #b3888b;
+        }
+
+        .stat-label {
+            color: var(--text-soft);
+            font-size: 0.95rem;
+        }
+
+        /* ---------- МЕНЮ (6 КОМПОЗИЦИЙ) ---------- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 28px 20px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+            text-align: center;
+            border: 1px solid rgba(243, 217, 217, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: var(--shadow-hover);
+            background: #fffdfb;
+            border-color: #f3d9d9;
+        }
+
+        .menu-emoji {
+            font-size: 3.8rem;
+            margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover .menu-emoji {
+            transform: scale(1.15) rotate(4deg);
+        }
+
+        .menu-card h3 {
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: #4a3b3b;
+            margin-bottom: 8px;
+        }
+
+        .menu-card .price {
+            font-weight: 500;
+            color: #b3888b;
+            font-size: 1.3rem;
+            margin: 10px 0 6px;
+        }
+
+        .menu-card .desc {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            line-height: 1.4;
+        }
+
+        /* ---------- АКЦИИ ---------- */
+        .promo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin-top: 16px;
+        }
+
+        .promo-card {
+            flex: 1 1 240px;
+            background: linear-gradient(135deg, #fdf0f0, #ffffff);
+            border-radius: var(--border-radius);
+            padding: 36px 28px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid #f3e1e1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-card::after {
+            content: '✨';
+            position: absolute;
+            bottom: 12px;
+            right: 18px;
+            font-size: 2rem;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            background: #fffaf8;
+        }
+
+        .promo-card:hover::after {
+            opacity: 0.7;
+            transform: scale(1.2);
+        }
+
+        .promo-badge {
+            display: inline-block;
+            background: #d4b3b3;
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 18px;
+        }
+
+        .promo-card h3 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .promo-card p {
+            color: var(--text-soft);
+            margin-bottom: 16px;
+        }
+
+        .promo-date {
+            font-size: 0.9rem;
+            color: #b3888b;
+            font-weight: 500;
+        }
+
+        /* ---------- БОНУСНАЯ ПРОГРАММА ---------- */
+        .bonus-wrapper {
+            background: var(--pastel-blue);
+            border-radius: var(--border-radius);
+            padding: 48px 40px;
+            margin-top: 24px;
+            transition: background 0.3s;
+        }
+
+        .bonus-wrapper:hover {
+            background: #e2eff9;
+        }
+
+        .bonus-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 36px 0 28px;
+        }
+
+        .bonus-step {
+            flex: 1 1 180px;
+            background: var(--white);
+            border-radius: 40px;
+            padding: 28px 18px;
+            box-shadow: var(--shadow-sm);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .bonus-step:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .step-icon {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+        }
+
+        .bonus-step h4 {
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 1.2rem;
+        }
+
+        .bonus-step p {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+        }
+
+        .bonus-note {
+            font-size: 1rem;
+            color: #4a3b3b;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 16px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        /* ---------- КОНТАКТЫ ---------- */
+        .contacts-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 48px 40px;
+            box-shadow: var(--shadow-sm);
+            transition: 0.3s;
+        }
+
+        .contacts-flex:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .contact-info {
+            flex: 1 1 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 8px 0;
+            transition: transform 0.2s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(6px);
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        .contact-text h4 {
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 1.1rem;
+        }
+
+        .contact-text p {
+            color: var(--text-soft);
+            font-size: 0.98rem;
+        }
+
+        .map-placeholder {
+            flex: 1 1 280px;
+            background: var(--pastel-mint);
+            border-radius: var(--border-radius-sm);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #4f3b3b;
+            transition: 0.3s;
+        }
+
+        .map-placeholder:hover {
+            background: #d0eae2;
+        }
+
+        .map-placeholder span {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        /* ---------- ФУТЕР ---------- */
+        footer {
+            text-align: center;
+            padding: 36px 24px;
+            background: #f3e7e7;
+            color: var(--text-soft);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(211, 184, 184, 0.3);
+        }
+
+        /* ---------- АДАПТИВНОСТЬ ---------- */
+        @media (max-width: 800px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 250, 245, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                padding: 24px 0;
+                gap: 16px;
+                box-shadow: 0 16px 24px rgba(0, 0, 0, 0.04);
+                border-bottom: 1px solid #f3d9d9;
+                transition: 0.3s;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .navbar {
+                padding: 12px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 56px 0;
+            }
+
+            .hero {
+                min-height: 70vh;
+            }
+
+            .hero-image .flower-badge {
+                font-size: 5rem;
+                padding: 18px;
+            }
+
+            .bonus-wrapper {
+                padding: 32px 20px;
+            }
+
+            .contacts-flex {
+                padding: 28px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .btn-primary {
+                padding: 14px 28px;
+                font-size: 1rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .promo-grid {
+                flex-direction: column;
+            }
+        }
+
+        /* ---------- ПЛАВНОЕ ПОЯВЛЕНИЕ (ДОП. ЭФФЕКТ) ---------- */
+        .fade-in {
+            animation: fadeUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* мягкий фокус для кнопок */
+        button, a, .menu-card, .promo-card, .bonus-step {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- ФИКСИРОВАННАЯ НАВИГАЦИЯ -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" aria-label="Middlemist — на главную">Middle<span>mist</span></a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#about">О нас</a>
+                <a href="#menu">Композиции</a>
+                <a href="#promo">Акции</a>
+                <a href="#bonus">Бонусы</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ГЛАВНЫЙ РАЗДЕЛ (HERO) -->
+        <section class="hero" id="home">
+            <div class="container hero-content">
+                <div class="hero-text fade-in">
+                    <h1>Цветы, которые <span class="accent">говорят</span> за вас</h1>
+                    <p>Нежные композиции с любовью из самого сердца. Создаём настроение и дарим эмоции с 2012 года.</p>
+                    <a href="#menu" class="btn-primary">Выбрать букет →</a>
+                </div>
+                <div class="hero-image fade-in">
+                    <div class="flower-badge">🌸🌷🌺</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- О КОМПАНИИ -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">О компании</h2>
+                <p class="section-subtitle">Middlemist — это семейная мастерская, где каждый бутон хранит историю.</p>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>Наша история началась с маленькой оранжереи в центре города. Мы влюблены в своё дело и верим, что цветы способны изменить настроение и даже судьбу. Работаем только с локальными плантациями и отбираем лучшие сорта.</p>
+                        <div class="about-highlight">
+                            «Мы не просто продаём цветы — мы создаём воспоминания, которые остаются с вами надолго».
+                        </div>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">10+</div>
+                                <div class="stat-label">лет опыта</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">34k</div>
+                                <div class="stat-label">счастливых клиентов</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">авторских композиций</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- МЕНЮ (6 КОМПОЗИЦИЙ) -->
+        <section id="menu">
+            <div class="container">
+                <h2 class="section-title">Фирменные композиции</h2>
+                <p class="section-subtitle">Шесть самых любимых букетов наших гостей — от нежных до ярких акцентов.</p>
+                <div class="menu-grid">
+                    <!-- 1 -->
+                    <div class="menu-card fade-in">
+                        <div class="menu-emoji">🌸</div>
+                        <h3>Middlemist Dream</h3>
+                        <div class="price">3 900 ₽</div>
+                        <p class="desc">Пионовидные розы, эустома, пампасная трава</p>
+                    </div>
+                    <!-- 2 -->
+                    <div class="menu-card fade-in">
+                        <div class="menu-emoji">🌷</div>
+                        <h3>Pastel Whisper</h3>
+                        <div class="price">2 750 ₽</div>
+                        <p class="desc">Тюльпаны, ранункулюсы, маттиола</p>
+                    </div>
+                    <!-- 3 -->
+                    <div class="menu-card fade-in">
+                        <div class="menu-emoji">💐</div>
+                        <h3>Lavender Cloud</h3>
+                        <div class="price">4 200 ₽</div>
+                        <p class="desc">Лаванда, лимониум, белая роза</p>
+                    </div>
+                    <!-- 4 -->
+                    <div class="menu-card fade-in">
+                        <div class="menu-emoji">🌺</div>
+                        <h3>Peach Sorbet</h3>
+                        <div class="price">3 450 ₽</div>
+                        <p class="desc">Персиковые розы, гербера, эвкалипт</p>
+                    </div>
+                    <!-- 5 -->
+                    <div class="menu-card fade-in">
+                        <div class="menu-emoji">🌼</div>
+                        <h3>Buttercup Joy</h3>
+                        <div class="price">2 300 ₽</div>
+                        <p class="desc">Ромашка, подсолнух, статица</p>
+                    </div>
+                    <!-- 6 -->
+                    <div class="menu-card fade-in">
+                        <div class="menu-emoji">🪷</div>
+                        <h3>Powder Blush</h3>
+                        <div class="price">4 800 ₽</div>
+                        <p class="desc">Пионы, гортензия, астильба</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- АКЦИИ -->
+        <section id="promo">
+            <div class="container">
+                <h2 class="section-title">Акции месяца</h2>
+                <p class="section-subtitle">Специальные предложения, чтобы радовать близких чаще.</p>
+                <div class="promo-grid">
+                    <div class="promo-card">
+                        <div class="promo-badge">-20%</div>
+                        <h3>Весенний бум</h3>
+                        <p>Скидка 20% на все весенние композиции из тюльпанов и гиацинтов.</p>
+                        <div class="promo-date">до 30 апреля</div>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-badge">2 = 1</div>
+                        <h3>Второй букет в подарок</h3>
+                        <p>При покупке любой композиции от 3500 ₽ — второй букет из коллекции «Мини» бесплатно.</p>
+                        <div class="promo-date">до 15 мая</div>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-badge">-15%</div>
+                        <h3>Утренняя свежесть</h3>
+                        <p>Скидка 15% на все заказы до 12:00 по будням. Дарите с самого утра!</p>
+                        <div class="promo-date">постоянная акция</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БОНУСНАЯ ПРОГРАММА -->
+        <section id="bonus">
+            <div class="container">
+                <h2 class="section-title">Бонусная программа</h2>
+                <p class="section-subtitle">Копите баллы и получайте цветы в подарок — просто и приятно.</p>
+                <div class="bonus-wrapper">
+                    <div class="bonus-steps">
+                        <div class="bonus-step">
+                            <div class="step-icon">💐</div>
+                            <h4>1. Покупайте</h4>
+                            <p>1 балл за каждые 50 ₽ в чеке</p>
+                        </div>
+                        <div class="bonus-step">
+                            <div class="step-icon">🎁</div>
+                            <h4>2. Копите</h4>
+                            <p>Баллы суммируются и не сгорают</p>
+                        </div>
+                        <div class="bonus-step">
+                            <div class="step-icon">✨</div>
+                            <h4>3. Тратьте</h4>
+                            <p>Оплачивайте до 30% от покупки</p>
+                        </div>
+                    </div>
+                    <div class="bonus-note">
+                        🌟 1 балл = 1 ₽ · Приветственные 200 баллов новым клиентам
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+        <section id="contacts">
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                <p class="section-subtitle">Мы всегда рядом — заходите за вдохновением и свежими цветами.</p>
+                <div class="contacts-flex">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <h4>Адрес</h4>
+                                <p>Москва, ул. Цветочная, 12 (м. «Садовая»)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">⏰</div>
+                            <div class="contact-text">
+                                <h4>Режим работы</h4>
+                                <p>Пн–Пт: 9:00 – 21:00<br>Сб–Вс: 10:00 – 20:00</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-text">
+                                <h4>Телефон</h4>
+                                <p>+7 (999) 123-45-67</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>hello@middlemist.ru</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-placeholder">
+                        <span>🗺️</span>
+                        <p>Мы на карте: ул. Цветочная, 12<br>Удобная парковка и вход с улицы</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <div class="container">
+            © 2025 Middlemist — цветочный магазин. Все букеты созданы с любовью.
+        </div>
+    </footer>
+
+    <!-- ПЛАВНАЯ ПРОКРУТКА + МОБИЛЬНОЕ МЕНЮ -->
+    <script>
+        (function() {
+            // Мобильное меню: переключение
+            const toggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (toggle) {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // Закрываем меню при клике по ссылке (для мобильных)
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Закрываем меню при клике вне области навигации
+            document.addEventListener('click', function(event) {
+                const isNavbar = event.target.closest('.navbar');
+                if (!isNavbar && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // Плавная прокрутка (для всех браузеров, включая поддержку)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === "#" || href === "") return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        const offsetTop = target.getBoundingClientRect().top + window.scrollY - 70;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Легкая анимация появления для карточек (уже в CSS, но можно добавить наблюдение)
+            const fadeElements = document.querySelectorAll('.fade-in');
+            if (fadeElements.length) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, { threshold: 0.1 });
+                fadeElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(24px)';
+                    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+                    observer.observe(el);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
