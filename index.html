@@ -602,38 +602,233 @@
             font-size: 0.98rem;
         }
 
-        .map-placeholder {
+        /* ---------- ФОРМА ОБРАТНОЙ СВЯЗИ ---------- */
+        .contact-form {
             flex: 1 1 280px;
             background: var(--pastel-mint);
             border-radius: var(--border-radius-sm);
             padding: 32px 24px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-size: 1.2rem;
+            gap: 16px;
             color: #4f3b3b;
             transition: 0.3s;
         }
 
-        .map-placeholder:hover {
+        .contact-form:hover {
             background: #d0eae2;
         }
 
-        .map-placeholder span {
-            font-size: 3rem;
-            margin-bottom: 12px;
+        .contact-form h3 {
+            font-weight: 500;
+            font-size: 1.35rem;
+            margin-bottom: 2px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-field label {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-soft);
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background: var(--white);
+            border: 1px solid rgba(179, 136, 139, 0.35);
+            border-radius: 12px;
+            padding: 12px 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-field textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #b3888b;
+            box-shadow: 0 0 0 3px rgba(179, 136, 139, 0.15);
+        }
+
+        .form-field input.invalid,
+        .form-field textarea.invalid {
+            border-color: #c96a6a;
+            box-shadow: 0 0 0 3px rgba(201, 106, 106, 0.15);
+        }
+
+        .form-error {
+            min-height: 1em;
+            font-size: 0.85rem;
+            color: #b3403f;
+        }
+
+        .form-submit {
+            align-self: flex-start;
+            background: #d4b3b3;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 60px;
+            padding: 14px 32px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 12px 24px -8px rgba(212, 179, 179, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: #c49b9b;
+            transform: translateY(-3px);
+            box-shadow: 0 22px 30px -10px rgba(196, 155, 155, 0.5);
+        }
+
+        .form-success {
+            font-size: 0.92rem;
+            color: #2f6b52;
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 12px;
+            padding: 10px 14px;
         }
 
         /* ---------- ФУТЕР ---------- */
         footer {
-            text-align: center;
-            padding: 36px 24px;
+            padding: 48px 0 28px;
             background: #f3e7e7;
             color: var(--text-soft);
             font-size: 0.95rem;
             border-top: 1px solid rgba(211, 184, 184, 0.3);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 36px;
+            text-align: left;
+        }
+
+        .footer-brand {
+            flex: 1 1 280px;
+        }
+
+        .footer-logo {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            transition: transform 0.2s;
+        }
+
+        .footer-logo span {
+            font-weight: 500;
+            color: #b3888b;
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .footer-tagline {
+            margin-top: 12px;
+            max-width: 340px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .footer-heading {
+            display: block;
+            margin-bottom: 14px;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #4a3b3b;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 0 1 260px;
+        }
+
+        .footer-contacts a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-soft);
+            font-size: 0.98rem;
+            transition: color 0.2s, transform 0.2s;
+            word-break: break-word;
+        }
+
+        .footer-contacts a:hover {
+            color: #b3888b;
+            transform: translateX(4px);
+        }
+
+        .footer-contacts svg {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+            fill: currentColor;
+        }
+
+        .footer-socials {
+            flex: 0 1 220px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--white);
+            color: #b3888b;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .social-link svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .social-link:hover {
+            background: #d4b3b3;
+            color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .footer-bottom {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(211, 184, 184, 0.35);
+            text-align: center;
+            font-size: 0.9rem;
         }
 
         /* ---------- АДАПТИВНОСТЬ ---------- */
@@ -693,6 +888,30 @@
 
             .contacts-flex {
                 padding: 28px 18px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 28px;
+            }
+
+            .footer-tagline {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .footer-contacts {
+                align-items: center;
+            }
+
+            .footer-socials {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
             }
         }
 
@@ -766,7 +985,7 @@
         <section class="hero" id="home">
             <div class="container hero-content">
                 <div class="hero-text fade-in">
-                    <h1>Цветы, которые <span class="accent">говорят</span> за вас</h1>
+                    <h1>Цветы, которые <span class="accent">говорят</span> за вас — Обновлено через CI/CD</h1>
                     <p>Нежные композиции с любовью из самого сердца. Создаём настроение и дарим эмоции с 2012 года.</p>
                     <a href="#menu" class="btn-primary">Выбрать букет →</a>
                 </div>
@@ -929,7 +1148,7 @@
                             <div class="contact-icon">📍</div>
                             <div class="contact-text">
                                 <h4>Адрес</h4>
-                                <p>Москва, ул. Цветочная, 12 (м. «Садовая»)</p>
+                                <p>г. Валдай, ул. Ломоносова 88/27</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -943,21 +1162,35 @@
                             <div class="contact-icon">📞</div>
                             <div class="contact-text">
                                 <h4>Телефон</h4>
-                                <p>+7 (999) 123-45-67</p>
+                                <p>+7 (911) 613-25-63</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">✉️</div>
                             <div class="contact-text">
                                 <h4>Email</h4>
-                                <p>hello@middlemist.ru</p>
+                                <p>cofiyb2008@gmail.com</p>
                             </div>
                         </div>
                     </div>
-                    <div class="map-placeholder">
-                        <span>🗺️</span>
-                        <p>Мы на карте: ул. Цветочная, 12<br>Удобная парковка и вход с улицы</p>
-                    </div>
+                    <form class="contact-form" id="feedbackForm" novalidate>
+                        <h3>Форма обратной связи</h3>
+                        <div class="form-field">
+                            <label for="fbName">Имя</label>
+                            <input type="text" id="fbName" name="name" placeholder="Как к вам обращаться" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="fbEmail">Email</label>
+                            <input type="email" id="fbEmail" name="email" placeholder="you@example.com" required>
+                            <div class="form-error" id="emailError" role="alert"></div>
+                        </div>
+                        <div class="form-field">
+                            <label for="fbMessage">Сообщение</label>
+                            <textarea id="fbMessage" name="message" placeholder="Ваш вопрос или пожелание" required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Отправить сообщение</button>
+                        <div class="form-success" id="formSuccess" hidden>Спасибо! Ваше сообщение отправлено — мы свяжемся с вами в ближайшее время.</div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -966,7 +1199,40 @@
     <!-- ФУТЕР -->
     <footer>
         <div class="container">
-            © 2025 Middlemist — цветочный магазин. Все букеты созданы с любовью.
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo" aria-label="Middlemist — на главную">Middle<span>mist</span></a>
+                    <p class="footer-tagline">Цветочный магазин, где каждый букет создан с любовью. Дарим эмоции с 2025 года.</p>
+                </div>
+
+                <div class="footer-contacts">
+                    <span class="footer-heading">Контакты</span>
+                    <a href="tel:+79116132563" aria-label="Позвонить по телефону +7 (911) 613-25-63">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
+                        +7 (911) 613-25-63
+                    </a>
+                    <a href="mailto:cofiyb2008@gmail.com" aria-label="Написать на email cofiyb2008@gmail.com">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.24-8 5-8-5V6l8 5 8-5v2.24Z"/></svg>
+                        cofiyb2008@gmail.com
+                    </a>
+                </div>
+
+                <div class="footer-socials">
+                    <span class="footer-heading">Мы в соцсетях</span>
+                    <div class="social-links">
+                        <a class="social-link" href="https://t.me/suriiva" target="_blank" rel="noopener noreferrer" aria-label="Telegram Middlemist" title="Telegram">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.94c-.22.21-.4.39-.83.4z"/></svg>
+                        </a>
+                        <a class="social-link" href="https://vk.ru/14sonlya" target="_blank" rel="noopener noreferrer" aria-label="VK Middlemist" title="VK">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.785 16.241s.288-.032.436-.191c.135-.145.131-.418.131-.418s-.019-1.276.574-1.464c.585-.184 1.335 1.235 2.132 1.783.602.414 1.059.323 1.059.323l2.127-.03s1.113-.069.585-.944c-.043-.071-.308-.649-1.586-1.837-1.337-1.244-1.157-1.043.452-3.195.981-1.311 1.374-2.111 1.251-2.454-.117-.326-.842-.24-.842-.24l-2.394.015s-.177-.024-.308.054c-.129.077-.211.256-.211.256s-.379 1.008-.884 1.866c-1.067 1.813-1.493 1.909-1.667 1.796-.405-.262-.304-1.052-.304-1.613 0-1.752.266-2.482-.519-2.671-.261-.063-.453-.104-1.119-.111-.855-.009-1.578.003-1.987.203-.272.133-.483.43-.355.447.159.021.519.097.71.357.246.335.237 1.087.237 1.087s.141 2.062-.329 2.318c-.322.175-.765-.182-1.715-1.816-.487-.841-.855-1.771-.855-1.771s-.071-.174-.198-.267c-.153-.113-.368-.149-.368-.149l-2.274.015s-.341.01-.467.158c-.112.132-.009.404-.009.404s1.781 4.166 3.797 6.265c1.848 1.925 3.947 1.798 3.947 1.798h.951z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                © <span id="footerYear">2025</span> Middlemist — цветочный магазин. Все права защищены.
+            </div>
         </div>
     </footer>
 
@@ -976,6 +1242,13 @@
             // Мобильное меню: переключение
             const toggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
+
+            // Год создания и текущий год в подвале
+            const footerYear = document.getElementById('footerYear');
+            if (footerYear) {
+                const currentYear = new Date().getFullYear();
+                footerYear.textContent = currentYear > 2025 ? '2025–' + currentYear : '2025';
+            }
 
             if (toggle) {
                 toggle.addEventListener('click', function(e) {
@@ -1015,6 +1288,82 @@
                     }
                 });
             });
+
+            // Форма обратной связи: валидация email (наличие @) и обработка отправки
+            const feedbackForm = document.getElementById('feedbackForm');
+            if (feedbackForm) {
+                const nameInput = document.getElementById('fbName');
+                const emailInput = document.getElementById('fbEmail');
+                const messageInput = document.getElementById('fbMessage');
+                const emailError = document.getElementById('emailError');
+                const formSuccess = document.getElementById('formSuccess');
+
+                function validateEmail() {
+                    const value = emailInput.value.trim();
+                    const atIndex = value.indexOf('@');
+                    const hasAt = atIndex > 0 && atIndex < value.length - 1;
+
+                    if (!value) {
+                        emailError.textContent = 'Укажите email.';
+                        emailInput.classList.add('invalid');
+                        emailInput.setAttribute('aria-invalid', 'true');
+                        return false;
+                    }
+
+                    if (!hasAt) {
+                        emailError.textContent = 'Email должен содержать символ «@» и заполненные части до и после него.';
+                        emailInput.classList.add('invalid');
+                        emailInput.setAttribute('aria-invalid', 'true');
+                        return false;
+                    }
+
+                    emailError.textContent = '';
+                    emailInput.classList.remove('invalid');
+                    emailInput.removeAttribute('aria-invalid');
+                    return true;
+                }
+
+                emailInput.addEventListener('input', function() {
+                    if (emailInput.classList.contains('invalid')) {
+                        validateEmail();
+                    }
+                });
+
+                emailInput.addEventListener('blur', function() {
+                    if (emailInput.value.trim() !== '') {
+                        validateEmail();
+                    }
+                });
+
+                feedbackForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    formSuccess.hidden = true;
+
+                    const emailOk = validateEmail();
+                    const formOk = feedbackForm.checkValidity();
+
+                    if (!emailOk || !formOk) {
+                        const firstInvalid = feedbackForm.querySelector('.invalid') ||
+                            feedbackForm.querySelector(':invalid');
+                        if (firstInvalid) {
+                            firstInvalid.focus();
+                        }
+                        return;
+                    }
+
+                    // Здесь можно отправить данные на сервер
+                    console.log('Форма обратной связи:', {
+                        name: nameInput.value.trim(),
+                        email: emailInput.value.trim(),
+                        message: messageInput.value.trim()
+                    });
+
+                    feedbackForm.reset();
+                    emailInput.classList.remove('invalid');
+                    emailError.textContent = '';
+                    formSuccess.hidden = false;
+                });
+            }
 
             // Легкая анимация появления для карточек (уже в CSS, но можно добавить наблюдение)
             const fadeElements = document.querySelectorAll('.fade-in');
