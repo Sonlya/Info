@@ -831,6 +831,51 @@
             font-size: 0.9rem;
         }
 
+        /* ---------- КНОПКА «НАВЕРХ» ---------- */
+        .back-to-top {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            background: #d4b3b3;
+            color: #ffffff;
+            box-shadow: 0 12px 24px -8px rgba(212, 179, 179, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .back-to-top svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #c49b9b;
+            transform: translateY(-4px);
+            box-shadow: 0 22px 30px -10px rgba(196, 155, 155, 0.55);
+        }
+
+        .back-to-top:focus-visible {
+            outline: 2px solid #b3888b;
+            outline-offset: 3px;
+        }
+
         /* ---------- АДАПТИВНОСТЬ ---------- */
         @media (max-width: 800px) {
             .nav-links {
@@ -936,6 +981,18 @@
             .promo-grid {
                 flex-direction: column;
             }
+
+            .back-to-top {
+                right: 16px;
+                bottom: 16px;
+                width: 46px;
+                height: 46px;
+            }
+
+            .back-to-top svg {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         /* ---------- ПЛАВНОЕ ПОЯВЛЕНИЕ (ДОП. ЭФФЕКТ) ---------- */
@@ -985,7 +1042,7 @@
         <section class="hero" id="home">
             <div class="container hero-content">
                 <div class="hero-text fade-in">
-                    <h1>Цветы, которые <span class="accent">говорят</span> за вас — Обновлено через CI/CD</h1>
+                    <h1>Цветы, которые <span class="accent">говорят</span> за вас</h1>
                     <p>Нежные композиции с любовью из самого сердца. Создаём настроение и дарим эмоции с 2012 года.</p>
                     <a href="#menu" class="btn-primary">Выбрать букет →</a>
                 </div>
@@ -1236,6 +1293,11 @@
         </div>
     </footer>
 
+    <!-- КНОПКА «НАВЕРХ» -->
+    <button type="button" class="back-to-top" id="backToTop" aria-label="Вернуться наверх" title="Наверх">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a1 1 0 0 1 .7.3l6 6a1 1 0 0 1-1.4 1.4L13 7.41V19a1 1 0 0 1-2 0V7.41l-4.3 4.3a1 1 0 0 1-1.4-1.42l6-6A1 1 0 0 1 12 4Z"/></svg>
+    </button>
+
     <!-- ПЛАВНАЯ ПРОКРУТКА + МОБИЛЬНОЕ МЕНЮ -->
     <script>
         (function() {
@@ -1288,6 +1350,21 @@
                     }
                 });
             });
+
+            // Кнопка «Наверх»: показываем после прокрутки и плавно возвращаем к началу
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                const toggleBackToTop = () => {
+                    backToTop.classList.toggle('visible', window.scrollY > 400);
+                };
+
+                toggleBackToTop();
+                window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
 
             // Форма обратной связи: валидация email (наличие @) и обработка отправки
             const feedbackForm = document.getElementById('feedbackForm');
